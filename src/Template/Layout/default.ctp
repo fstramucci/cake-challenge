@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,46 +14,97 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
+        Cake Challenge -
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
+    <!-- Bootstrap 5.1.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/57a891b8cd.js" crossorigin="anonymous"></script>
+
     <?= $this->Html->css('style.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-            </ul>
+
+<body class="d-flex flex-column vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/">Cake Challenge</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link <?= $active_menu_item === 'home' ? 'active' : '' ?>" href="/">Introducción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $active_menu_item === 'users' ? 'active' : '' ?>" href="/users">Usuarios</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
-    </div>
-    <footer>
+
+    <main class="d-flex flex-grow-1 flex-column flex-md-row">
+        <?php if ($this->fetch('sidebar')) : ?>
+            <div class="d-flex flex-column flex-grow-0 p-3 text-white bg-dark col-12 col-md-3 col-lg-2">
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <?= $this->fetch('sidebar') ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <div class="py-2" style="overflow-x: auto; flex-grow: 999;">
+            <div class="container">
+                <?= $this->Flash->render() ?>
+                <?= $this->fetch('content') ?>
+            </div>
+        </div>
+    </main>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-0 border-top">
+        <div class="col-md-4 d-flex justify-content-center">
+            <span class="text-muted">Franco A. Stramucci -
+                <a href="https://github.com/fstramucci/cake-challenge" target="_blank" title="Repositorio en GitHub">
+                    código fuente
+                </a>
+            </span>
+        </div>
+
+        <ul class="nav col-md-4 d-flex justify-content-center list-unstyled">
+            <li class="ms-3">
+                <a class="text-muted" href="https://www.linkedin.com/in/franco-stramucci/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-muted" href="https://github.com/fstramucci" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a class="text-muted" href="https://gitlab.com/fstramucci" target="_blank">
+                    <i class="fab fa-gitlab"></i>
+                </a>
+            </li>
+        </ul>
     </footer>
 </body>
+
 </html>

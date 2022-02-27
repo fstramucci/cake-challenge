@@ -4,44 +4,39 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
-    <table class="vertical-table">
+<?php $this->start('sidebar'); ?>
+<?= $this->element('sidebar/edit');?>
+<?= $this->element('sidebar/delete');?>
+<hr>
+<?= $this->element('sidebar/index');?>
+<?= $this->element('sidebar/add');?>
+<?php $this->end(); ?>
+
+<div>
+    <h3><?= h($user->username) ?></h3>
+    <table class="table">
         <tr>
-            <th scope="row"><?= __('Username') ?></th>
+            <th scope="row">Nombre de usuario</th>
             <td><?= h($user->username) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Email') ?></th>
+            <th scope="row">Correo electrónico</th>
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Role') ?></th>
+            <th scope="row">Rol</th>
             <td><?= h($user->role) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
+            <th scope="row">ID</th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Created') ?></th>
+            <th scope="row">Creado</th>
             <td><?= h($user->created) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Modified') ?></th>
+            <th scope="row">Modificado</th>
             <td><?= h($user->modified) ?></td>
         </tr>
     </table>
