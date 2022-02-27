@@ -28,6 +28,13 @@
                 echo $this->Form->select('role', ['admin' => 'Administrador', 'guest' => 'Invitado']);
                 ?>
             </div>
+            <?= $this->Form->control('password', [
+                'label' => 'Cambiar contraseña', 
+                'required' => false,
+                'value' => ''
+            ]); ?>
+            <div class="form-text">Deje en blanco si no desea cambiar la contraseña.</div>
+            
         </fieldset>
         <?= $this->Form->button('Guardar cambios', ['class' => 'btn btn-primary mt-4']) ?>
         <?= $this->Form->end() ?>
