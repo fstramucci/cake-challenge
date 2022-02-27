@@ -17,6 +17,7 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['add', 'logout']);
+        $this->active_menu_item = "users";
     }
 
     public function login()

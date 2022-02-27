@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,6 +13,7 @@
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -27,6 +29,7 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+    protected $active_menu_item;
 
     /**
      * Initialization hook method.
@@ -37,7 +40,8 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
 
         $this->loadComponent('RequestHandler', [
@@ -64,7 +68,14 @@ class AppController extends Controller
         ]);
     }
 
-    public function beforeFilter(Event $event) {
+    public function beforeFilter(Event $event)
+    {
         $this->Auth->allow(['index', 'view', 'display']);
+    }
+
+    public function beforeRender(Event $event)
+    {
+        parent::beforeRender($event);
+        $this->set("active_menu_item", $this->active_menu_item);
     }
 }
