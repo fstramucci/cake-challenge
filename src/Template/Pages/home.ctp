@@ -46,7 +46,7 @@
     Validaciones (nombre de usuario, contraseña).
   </li>
   <li>
-    Barra de búsqueda.
+    Barra de búsqueda (falta desactivarla si no estás logeado).
   </li>
   <li>
     Traducir strings faltantes.
