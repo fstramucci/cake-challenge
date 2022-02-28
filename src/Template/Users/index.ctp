@@ -37,17 +37,19 @@
                         <td class="actions">
                             <?= $this->Html->link('Ver', ['action' => 'view', $user->id]) ?>
                             <?php
-                            if ($this->Session->read('Auth.User')) {
+                            if ($this->Session->read('Auth.User.id') === $user->id) {
+                                // es a sí mismo, solo permitir edición (admin y guest)
                                 echo $this->Html->link('Editar', ['action' => 'edit', $user->id]).' ';
-                                                                
-                                if ($this->Session->read('Auth.User.id') !== $user->id) {
-                                    echo $this->Form->postLink('Borrar', ['action' => 'delete', $user->id], ['confirm' =>'¿Está seguro/a que desea borrar al usuario "'.$user->id.'"?']).' ';
 
-                                    if ($user->inactive) {
-                                        echo $this->Form->postLink('Reactivar', ['action' => 'edit', $user->id], ['data' => ['inactive' => 0]]);
-                                    } else {
-                                        echo $this->Form->postLink('Desactivar', ['action' => 'edit', $user->id], ['data' => ['inactive' => 1]]);
-                                    }
+                            } elseif ($this->Session->read('Auth.User.role') === 'admin') { 
+                                // es a otros, solo los admin pueden editar, borrar y (des)activar
+                                echo $this->Html->link('Editar', ['action' => 'edit', $user->id]).' ';
+                                echo $this->Form->postLink('Borrar', ['action' => 'delete', $user->id], ['confirm' =>'¿Está seguro/a que desea borrar al usuario "'.$user->id.'"?']).' ';
+
+                                if ($user->inactive) {
+                                    echo $this->Form->postLink('Reactivar', ['action' => 'edit', $user->id], ['data' => ['inactive' => 0]]);
+                                } else {
+                                    echo $this->Form->postLink('Desactivar', ['action' => 'edit', $user->id], ['data' => ['inactive' => 1]]);
                                 }
                             }
                             ?>

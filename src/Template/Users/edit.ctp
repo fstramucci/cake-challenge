@@ -21,11 +21,14 @@
             <?php
             echo $this->Form->control('username', ['label' => 'Nombre de usuario']);
             echo $this->Form->control('email', ['label' => 'Correo electrónico']);
+
+            // nadie puede editar su propio rol
+            $disabledRole = $this->Session->read('Auth.User.id') === $user->id;
             ?>
             <div class="input mt-4 role required">
                 <?php
                 echo $this->Form->label('role', 'Rol');
-                echo $this->Form->select('role', ['admin' => 'Administrador', 'guest' => 'Invitado']);
+                echo $this->Form->select('role', ['admin' => 'Administrador', 'guest' => 'Invitado'], ['disabled' => $disabledRole]);
                 ?>
             </div>
             <?= $this->Form->control('password', [

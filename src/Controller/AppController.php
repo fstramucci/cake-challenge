@@ -56,7 +56,8 @@ class AppController extends Controller
         //$this->loadComponent('Security');
 
         $this->loadComponent('Auth', [
-            'authError' => 'Did you really think you are allowed to see that?',
+            'authorize'=> 'Controller',
+            'unauthorizedRedirect' => $this->referer(),
             'loginRedirect' => [
                 'controller' => 'Users',
                 'action' => 'index'
@@ -65,23 +66,21 @@ class AppController extends Controller
                 'controller' => 'Pages',
                 'action' => 'display',
                 'home'
-            ]
+            ],
+            'authError' => 'Acción no permitida con su nivel de privilegios.'
         ]);
     }
 
     public function isAuthorized($user)
     {
-        // Admin can access every action
-        if (isset($user['role']) && $user['role'] === 'admin') {
-            return true;
-        }
-        
+        // Por defecto no permitir ninguna acción
         return false;
     }
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display']);
+        // Permitir "display" para no-usuarios
+        $this->Auth->allow(['display']);
     }
 
     public function beforeRender(Event $event)
