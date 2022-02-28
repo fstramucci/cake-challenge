@@ -35,9 +35,9 @@ class UsersController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        // Index, view, edit son permitidas a usuarios logeados
+        // Index, view, edit y search son permitidas a usuarios logeados
         // Edit tiene restricciones especiales (definidas en la función)
-        if (in_array($action, ['index', 'view', 'edit'])) {
+        if (in_array($action, ['index', 'view', 'edit', 'search'])) {
             return true;
         }
 
@@ -76,9 +76,35 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
+        $searchString = $this->request->getQuery('query');
+        if (!empty($searchString)) {
+            // Hay una búsqueda activa
+            $searchTermsArray = [];
+
+            // Separamos por términos
+            $terms = explode(' ', $searchString);
+            foreach ($terms as $term) {
+                // Cada uno de los términos puede referirse a id, username o email (combinador por OR)
+                // Mientras que todos los términos en su conjunto tienen que estar presentes (combinados por AND)
+                $searchTermsArray[] = ['OR' => [
+                    ['id' => intval($term)],
+                    ['username LIKE' => '%'.$term.'%'],
+                    ['email LIKE' => '%'.$term.'%']
+                ]] ;
+            }
+            $query = $this->Users->find('all')
+            ->where([
+                $searchTermsArray
+            ]);
+        } else {
+            // Si no hay búsqueda activa, muestra todos
+            $query = $this->Users;
+        }
+        // Y compagina
+        $users = $this->paginate($query);
 
         $this->set(compact('users'));
+        $this->set('query', $searchString);
     }
 
     /**
@@ -201,5 +227,15 @@ class UsersController extends AppController
             return true;
         }
         return false;
+    }
+
+    public function search()
+    {
+        /*
+        $query = $this->request->getQuery('query');
+        if (!empty($query)) {
+
+        }
+        return $this->redirect(['action' => 'index']);*/
     }
 }

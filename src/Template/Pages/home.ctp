@@ -48,4 +48,7 @@
   <li>
     Barra de búsqueda.
   </li>
+  <li>
+    Traducir strings faltantes.
+  </li>
 </ul>

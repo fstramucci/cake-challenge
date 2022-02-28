@@ -69,12 +69,11 @@
                     <?php endif; ?>
 
                 </ul>
-
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
                 
+                <?= $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'index'], 'type' => 'get', 'class' => 'd-flex']) ?>
+                <?= $this->Form->search('query', ['label' => false, 'placeholder' => 'Buscar usuario', 'class' => 'form-control me-2']); ?>
+                <?= $this->Form->button('Buscar', ['class' => 'btn btn-outline-light']) ?>
+                <?= $this->Form->end() ?>                
             </div>
         </div>
     </nav>

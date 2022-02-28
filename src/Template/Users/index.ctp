@@ -12,6 +12,13 @@
 
 <div>
     <h3>Usuarios</h3>
+    <?php if (!empty($query)): ?>
+    <div class="alert alert-secondary">
+        <p>Búsqueda activa: <em>"<?= h($query) ?>"</em></p>
+        <a href="/users" class="btn btn-light">Restablecer</a>
+    </div>
+    <?php endif; ?>
+    
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
