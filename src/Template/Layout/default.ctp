@@ -48,15 +48,33 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link <?= $active_menu_item === 'home' ? 'active' : '' ?>" href="/">Introducción</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?= $active_menu_item === 'users' ? 'active' : '' ?>" href="/users">Usuarios</a>
                     </li>
+
+                    <?php if ($this->Session->read('Auth.User')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/logout">Cerrar sesión</a>
+                    </li>
+                    <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $active_menu_item === 'login' ? 'active' : '' ?>" href="/users/login">Iniciar sesión</a>
+                    </li>
+                    <?php endif; ?>
+
                 </ul>
+
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+                
             </div>
         </div>
     </nav>

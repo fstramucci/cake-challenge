@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -74,6 +74,9 @@ class UsersTable extends Table
                 'rule' => ['inList', ['admin', 'guest']],
                 'message' => 'Por favor ingresa un rol válido'
             ]);
+
+        $validator
+            ->boolean('inactive');
 
         return $validator;
     }

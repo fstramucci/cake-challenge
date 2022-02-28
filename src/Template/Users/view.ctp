@@ -28,6 +28,10 @@
             <td><?= h($user->role) ?></td>
         </tr>
         <tr>
+            <th scope="row">Inactivo</th>
+            <td><?= $user->inactive ? 'Sí' : 'No' ?></td>
+        </tr>
+        <tr>
             <th scope="row">ID</th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>

@@ -56,6 +56,7 @@ class AppController extends Controller
         //$this->loadComponent('Security');
 
         $this->loadComponent('Auth', [
+            'authError' => 'Did you really think you are allowed to see that?',
             'loginRedirect' => [
                 'controller' => 'Users',
                 'action' => 'index'
@@ -68,6 +69,16 @@ class AppController extends Controller
         ]);
     }
 
+    public function isAuthorized($user)
+    {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+        
+        return false;
+    }
+
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index', 'view', 'display']);
@@ -76,6 +87,6 @@ class AppController extends Controller
     public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
-        $this->set("active_menu_item", $this->active_menu_item);
+        $this->set('active_menu_item', $this->active_menu_item);
     }
 }

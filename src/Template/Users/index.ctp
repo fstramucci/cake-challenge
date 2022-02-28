@@ -4,6 +4,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
+
 ?>
 <?php $this->start('sidebar'); ?>
 <?= $this->element('sidebar/add'); ?>
@@ -35,8 +36,21 @@
                         <td><?= h($user->modified) ?></td>
                         <td class="actions">
                             <?= $this->Html->link('Ver', ['action' => 'view', $user->id]) ?>
-                            <?= $this->Html->link('Editar', ['action' => 'edit', $user->id]) ?>
-                            <?= $this->Form->postLink('Borrar', ['action' => 'delete', $user->id], ['confirm' => __('¿Está seguro/a que desea borrar al usuario # {0}?', $user->id)]) ?>
+                            <?php
+                            if ($this->Session->read('Auth.User')) {
+                                echo $this->Html->link('Editar', ['action' => 'edit', $user->id]).' ';
+                                                                
+                                if ($this->Session->read('Auth.User.id') !== $user->id) {
+                                    echo $this->Form->postLink('Borrar', ['action' => 'delete', $user->id], ['confirm' =>'¿Está seguro/a que desea borrar al usuario "'.$user->id.'"?']).' ';
+
+                                    if ($user->inactive) {
+                                        echo $this->Form->postLink('Reactivar', ['action' => 'edit', $user->id], ['data' => ['inactive' => 0]]);
+                                    } else {
+                                        echo $this->Form->postLink('Desactivar', ['action' => 'edit', $user->id], ['data' => ['inactive' => 1]]);
+                                    }
+                                }
+                            }
+                            ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -45,11 +59,11 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . 'primera') ?> 
-            <?= $this->Paginator->prev('< ' . 'anterior') ?> 
+            <?= $this->Paginator->first('<< primera') ?> 
+            <?= $this->Paginator->prev('< anterior') ?> 
             <?= $this->Paginator->numbers() ?> 
-            <?= $this->Paginator->next('siguiente' . ' >') ?> 
-            <?= $this->Paginator->last('última' . ' >>') ?> 
+            <?= $this->Paginator->next('siguiente >') ?> 
+            <?= $this->Paginator->last('última >>') ?> 
         </ul>
         <p><?= $this->Paginator->counter(['format' => 'Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de un total de {{count}}']) ?></p>
     </div>

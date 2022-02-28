@@ -31,7 +31,8 @@
             <?= $this->Form->control('password', [
                 'label' => 'Cambiar contraseña', 
                 'required' => false,
-                'value' => ''
+                'value' => '',
+                'autocomplete' => 'new-password'
             ]); ?>
             <div class="form-text">Deje en blanco si no desea cambiar la contraseña.</div>
             

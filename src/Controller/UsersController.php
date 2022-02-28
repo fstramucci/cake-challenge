@@ -22,6 +22,7 @@ class UsersController extends AppController
 
     public function login()
     {
+        $this->active_menu_item = "login";
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -58,9 +59,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+        $user = $this->Users->get($id);
 
         $this->set('user', $user);
     }
