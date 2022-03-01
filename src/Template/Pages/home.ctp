@@ -1,7 +1,7 @@
 <h2>Cake Challenge</h2>
 <h5>Por Franco Stramucci - <a href="mailto:stramucci@gmail.com">stramucci@gmail.com</a></h5>
 
-<p>Esta es una prueba técnica para la empresa de e-learning chilena <a href="https://www.eclass.com/" target="_blank">eClass</a>.</p>
+<p>Esta es una prueba técnica para una importante empresa de e-learning chilena.</p>
 <p>
   Hay dos tipos de usuario: "admin" y "guest". Los usuarios con el rol "admin" pueden realizar
   todas las acciones, excepto desactivarse, borrarse o cambiar su rol.
