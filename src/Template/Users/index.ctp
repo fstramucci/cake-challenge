@@ -44,11 +44,11 @@
                         <td class="actions">
                             <?= $this->Html->link('Ver', ['action' => 'view', $user->id]) ?>
                             <?php
-                            if ($this->Session->read('Auth.User.id') === $user->id) {
+                            if ($this->request->getSession()->read('Auth.User.id') === $user->id) {
                                 // es a sí mismo, solo permitir edición (admin y guest)
                                 echo $this->Html->link('Editar', ['action' => 'edit', $user->id]).' ';
 
-                            } elseif ($this->Session->read('Auth.User.role') === 'admin') { 
+                            } elseif ($this->request->getSession()->read('Auth.User.role') === 'admin') { 
                                 // es a otros, solo los admin pueden editar, borrar y (des)activar
                                 echo $this->Html->link('Editar', ['action' => 'edit', $user->id]).' ';
                                 echo $this->Form->postLink('Borrar', ['action' => 'delete', $user->id], ['confirm' =>'¿Está seguro/a que desea borrar al usuario "'.$user->id.'"?']).' ';

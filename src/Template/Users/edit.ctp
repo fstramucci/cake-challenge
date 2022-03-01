@@ -23,7 +23,7 @@
             echo $this->Form->control('email', ['label' => 'Correo electrónico']);
 
             // nadie puede editar su propio rol
-            $disabledRole = $this->Session->read('Auth.User.id') === $user->id;
+            $disabledRole = $this->request->getSession()->read('Auth.User.id') === $user->id;
             ?>
             <div class="input mt-4 role required">
                 <?php
