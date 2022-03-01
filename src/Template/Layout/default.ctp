@@ -58,9 +58,9 @@
                         <a class="nav-link <?= $active_menu_item === 'users' ? 'active' : '' ?>" href="/users">Usuarios</a>
                     </li>
 
-                    <?php if ($this->Session->read('Auth.User')): ?>
+                    <?php if ($this->request->getSession()->read('Auth.User')): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users/logout">Cerrar sesión (<?= $this->Session->read('Auth.User.username') ?>)</a>
+                        <a class="nav-link" href="/users/logout">Cerrar sesión (<?= $this->request->getSession()->read('Auth.User.username') ?>)</a>
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
