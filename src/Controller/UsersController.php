@@ -132,11 +132,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success('El usuario fue agregado correctamente.');
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('El usuario no pudo ser agregado. Por favor, intente nuevamente.'));
         }
         $this->set(compact('user'));
     }
@@ -170,11 +170,11 @@ class UsersController extends AppController
 
                 $user = $this->Users->patchEntity($user, $data);
                 if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
+                    $this->Flash->success(__('Los cambios fueron guardados correctamente.'));
 
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('No pudieron guardarse los cambios. Por favor, intente nuevamente'));
             }
             $this->set(compact('user'));
         } else {
@@ -198,9 +198,9 @@ class UsersController extends AppController
         if (!$this->isSelf($id)) {
             $user = $this->Users->get($id);
             if ($this->Users->delete($user)) {
-                $this->Flash->success(__('The user has been deleted.'));
+                $this->Flash->success(__('El usuario fue borrado correctamente.'));
             } else {
-                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+                $this->Flash->error(__('El usuario no pudo ser borrado. Por favor, intente nuevamente.'));
             }
         } else {
             $this->Flash->error('No puede borrarse a sí mismo.');
@@ -227,15 +227,5 @@ class UsersController extends AppController
             return true;
         }
         return false;
-    }
-
-    public function search()
-    {
-        /*
-        $query = $this->request->getQuery('query');
-        if (!empty($query)) {
-
-        }
-        return $this->redirect(['action' => 'index']);*/
     }
 }

@@ -36,19 +36,7 @@
   <li>
     Revisar y mejorar Pagination.
   </li>
-</ul>
-
-<p><strong>
-  To-do list:
-</strong></p>
-<ul>
   <li>
-    Validaciones (nombre de usuario, contraseña).
-  </li>
-  <li>
-    Barra de búsqueda (falta desactivarla si no estás logeado).
-  </li>
-  <li>
-    Traducir strings faltantes.
+    Mover parte de la lógica que actualmente está en UsersController a otras partes de la aplicación.
   </li>
 </ul>
