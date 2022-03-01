@@ -9,10 +9,27 @@
   a sí mismos (pero no cambiar su rol, desactivarse o borrarse).
 </p>
 <p>
-  Además, todos los usuarios pueden acceder a la barra de búsqueda, que busca por nombre de usuario o correo electrónico.
+  Además, todos los usuarios pueden acceder a la barra de búsqueda, que busca por ID, nombre de usuario y correo electrónico.
 </p>
 <p>
-  Algunos features faltantes podrían ser:
+  Datos de acceso (usuario/contraseña):
+</p>
+<ul>
+  <li>
+    <strong>
+      Administrador:
+    </strong>
+    admin / secret
+  </li>
+  <li>
+    <strong>
+      Invitado:
+    </strong>
+    guest / secret
+  </li>
+</ul>
+<p>
+  Algunos puntos a mejorar podrían ser:
 </p>
 <ul>
   <li>
