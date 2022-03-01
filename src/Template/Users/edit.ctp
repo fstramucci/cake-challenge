@@ -19,7 +19,7 @@
         <fieldset>
             <legend>Editar usuario</legend>
             <?php
-            echo $this->Form->control('username', ['label' => 'Nombre de usuario']);
+            echo $this->Form->control('username', ['label' => 'Nombre de usuario', 'pattern' => '[a-zA-Z0-9]{3,50}', 'title' => 'Solo letras y números, de 3 a 50 caracteres']);
             echo $this->Form->control('email', ['label' => 'Correo electrónico']);
 
             // nadie puede editar su propio rol
@@ -35,6 +35,7 @@
                 'label' => 'Cambiar contraseña', 
                 'required' => false,
                 'value' => '',
+                'minlength' => 6, 'maxlength' => 64,
                 'autocomplete' => 'new-password'
             ]); ?>
             <div class="form-text">Deje en blanco si no desea cambiar la contraseña.</div>

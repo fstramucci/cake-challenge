@@ -52,17 +52,19 @@ class UsersTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('username')
-            ->maxLength('username', 50)
+            ->alphaNumeric('username', 'El nombre de usuario debe ser alfanumérico')
+            ->minLength('username', 3, 'El nombre de usuario debe tener al menos 3 caracteres')
+            ->maxLength('username', 50, 'El nombre de usuario debe tener 50 caracteres como máximo')
             ->notBlank('username', 'El nombre de usuario es requerido');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 255)
+            ->minLength('password', 6, 'La contraseña debe tener al menos 6 caracteres')
+            ->maxLength('password', 64, 'La contraseña debe tener 64 caracteres como máximo')
             ->notBlank('password', 'La contraseña es requerida');
 
         $validator
-            ->email('email')
+            ->email('email', false, 'El correo electrónico es inválido')
             ->maxLength('email', 255)
             ->notBlank('password', 'El correo electrónico es requerido');
 
